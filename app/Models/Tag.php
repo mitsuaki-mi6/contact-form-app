@@ -18,6 +18,6 @@ class Tag extends Model
     //** このタグが属する問い合わせを取得
     public function contacts(): BelongsToMany
     {
-        return $this->belongsToMany(Contact::class);
+        return $this->belongsToMany(Contact::class)->withTimestamps();
     }
 }

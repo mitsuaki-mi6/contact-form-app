@@ -33,7 +33,7 @@ class Contact extends Model
     //** この問い合わせに紐づくタグを取得
     public function tags(): BelongsToMany
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class)->withTimestamps();
     }
 
     //** genderのラベルを取得
