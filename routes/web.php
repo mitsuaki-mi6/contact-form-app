@@ -2,17 +2,16 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\ContactController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// PG01	お問い合わせフォーム入力ページ
+Route::get('/', [ContactController::class, 'index'])->name('contact.index');
+
+// PG02	お問い合わせフォーム確認ページ
+Route::post('/contacts/confirm', [ContactController::class, 'confirm'])->name('contact.confirm');
+
+// PG02	お問い合わせフォーム送信処理(テーブル更新)
+Route::post('/contacts', [ContactController::class, 'store'])->name('contact.store');
+
+//PG03	サンクスページ
+Route::get('/thanks', [ContactController::class, 'thanks'])->name('contact.thanks');
