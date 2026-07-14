@@ -33,6 +33,10 @@ class FortifyServiceProvider extends ServiceProvider
             return view('auth.login');
         });  // ブレードファイルの指定　20260713 MN
 
+        Fortify::registerView(function () {
+            return view('auth.register');
+        });  // ブレードファイルの指定　20260714 MN
+
         Fortify::createUsersUsing(CreateNewUser::class);
         Fortify::updateUserProfileInformationUsing(UpdateUserProfileInformation::class);
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
