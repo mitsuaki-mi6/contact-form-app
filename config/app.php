@@ -83,7 +83,8 @@ return [
     |
     */
 
-    'locale' => 'en',
+    // 'locale' => 'en',  ← 変更前
+    'locale' => 'ja',     // ← 変更後
 
     /*
     |--------------------------------------------------------------------------
@@ -109,7 +110,8 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    // 'faker_locale' => 'en_US',  ← 変更前
+    'faker_locale' => 'ja_JP',     // ← 変更後
 
     /*
     |--------------------------------------------------------------------------
@@ -168,6 +170,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\FortifyServiceProvider::class, // 20260713 追加 MN
     ])->toArray(),
 
     /*
