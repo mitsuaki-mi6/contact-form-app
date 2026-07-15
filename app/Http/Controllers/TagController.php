@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\IndexContactRequest;
 use App\Models\Contact;
 use App\Models\Category;
+use App\Http\Requests\StoreTagRequest;
+use App\Http\Requests\UpdateTagRequest;
 
 
 class TagController extends Controller
@@ -14,16 +16,11 @@ class TagController extends Controller
      * PG05-3	タグ編集ページ
      */
     // タグ作成
-    public function store(Request $request)
+    public function store(StoreTagRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-        ]);
-
         $tag = new \App\Models\Tag();
         $tag->name = $request->input('name');
         $tag->save();
-
         return redirect()->route('admin.index')->with('success', 'タグを作成しました');
     }
     // タグ編集画面表示
@@ -33,12 +30,8 @@ class TagController extends Controller
         return view('admin.edit_tag', compact('tag'));
     }
     // タグ更新
-    public function update(Request $request, $id)
+    public function update(UpdateTagRequest $request, $id)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-        ]);
-
         $tag = \App\Models\Tag::findOrFail($id);
         $tag->name = $request->input('name');
         $tag->save();
