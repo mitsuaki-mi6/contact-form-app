@@ -31,10 +31,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 
     // PG05 詳細表示
-    Route::get('/admin/{id}', [AdminController::class, 'show'])->name('admin.show');
+    Route::get('/admin/contacts/{id}', [AdminController::class, 'show'])->name('admin.show');
 
     // PG05 削除処理
-    Route::delete('/admin/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
+    Route::delete('/admin/contacts/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
 
     // --- タグ管理系 (TagController) ---
     // PG05-3 タグ作成

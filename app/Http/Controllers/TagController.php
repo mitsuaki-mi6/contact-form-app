@@ -8,6 +8,7 @@ use App\Models\Contact;
 use App\Models\Category;
 use App\Http\Requests\StoreTagRequest;
 use App\Http\Requests\UpdateTagRequest;
+use App\Models\Tag;
 
 
 class TagController extends Controller
@@ -27,7 +28,7 @@ class TagController extends Controller
     public function edit($id)
     {
         $tag = \App\Models\Tag::findOrFail($id);
-        return view('admin.edit_tag', compact('tag'));
+        return view('admin.tags.edit', compact('tag'));
     }
     // タグ更新
     public function update(UpdateTagRequest $request, $id)
@@ -41,7 +42,7 @@ class TagController extends Controller
     // タグ削除
     public function destroy($id)
     {
-        $tag = \App\Models\Tag::findOrFail($id);
+        $tag = Tag::findOrFail($id);
         $tag->delete();
 
         return redirect()->route('admin.index')->with('success', 'タグを削除しました');
