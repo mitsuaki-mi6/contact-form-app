@@ -2,10 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\IndexContactRequest;
-use App\Models\Contact;
-use App\Models\Category;
 use App\Http\Requests\StoreTagRequest;
 use App\Http\Requests\UpdateTagRequest;
 use App\Models\Tag;
