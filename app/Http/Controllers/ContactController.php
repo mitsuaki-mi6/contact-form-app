@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Models\Tag;
-use App\Models\Contact;
 use App\Http\Requests\ContactRequest;
+use App\Models\Category;
+use App\Models\Contact;
+use App\Models\Tag;
 
 class ContactController extends Controller
 {
@@ -31,8 +31,10 @@ class ContactController extends Controller
         $tags = isset($validated['tag_ids'])
             ? Tag::whereIn('id', $validated['tag_ids'])->get()
             : collect();
+
         return view('contact.confirm', compact('validated', 'category', 'tags'));
     }
+
     /**
      * PG02	お問い合わせフォーム入力情報の登録
      */
@@ -41,12 +43,14 @@ class ContactController extends Controller
         $validated = $request->validated();
         $contact = Contact::create($validated);
         // タグが選択されていた場合の処理
-        if (!empty($validated['tag_ids'])) {
+        if (! empty($validated['tag_ids'])) {
             $contact->tags()->attach($validated['tag_ids']);
         }
+
         // 登録後、PG03　サンクスページにリダイレクト
         return redirect()->route('contact.thanks');
     }
+
     /**
      * PG03 サンクスページ
      */

@@ -23,6 +23,7 @@ class StoreTagRequest extends FormRequest
             'name' => ['required', 'string', 'max:50', 'unique:tags,name'],
         ];
     }
+
     /**
      * バリデーションメッセージ
      */

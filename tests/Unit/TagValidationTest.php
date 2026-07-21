@@ -2,20 +2,20 @@
 
 namespace Tests\Unit;
 
+use App\Http\Requests\StoreTagRequest;
+use App\Models\Tag;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use App\Http\Requests\StoreTagRequest;
 
 class TagValidationTest extends TestCase
 {
-
     use RefreshDatabase;
 
     /** @test */
     public function タグ名に入力がない(): void
     {
         // バリデーションルールの取得
-        $allRules = (new StoreTagRequest())->rules();
+        $allRules = (new StoreTagRequest)->rules();
         $rules = ['name' => $allRules['name']]; // タグ名のバリデーションルールのみを使用
 
         // Arrange データセット(異常系 タグ名に入力がない)
@@ -35,7 +35,7 @@ class TagValidationTest extends TestCase
     {
         // Arrange
         // バリデーションルールの取得
-        $allRules = (new StoreTagRequest())->rules();
+        $allRules = (new StoreTagRequest)->rules();
         $rules = ['name' => $allRules['name']]; // タグ名のバリデーションルールのみを使用
 
         // Arrange データセット(異常系 タグ名の文字数オーパー)
@@ -55,10 +55,10 @@ class TagValidationTest extends TestCase
     {
         // Arrange
         // タグを作成しておく（重複チェックのため）
-        \App\Models\Tag::factory()->create(['name' => 'テストタグ']);
+        Tag::factory()->create(['name' => 'テストタグ']);
 
         // バリデーションルールの取得
-        $allRules = (new StoreTagRequest())->rules();
+        $allRules = (new StoreTagRequest)->rules();
         $rules = ['name' => $allRules['name']]; // タグ名のバリデーションルールのみを使用
 
         // Arrange データセット(異常系 タグ名が重複している)
@@ -78,7 +78,7 @@ class TagValidationTest extends TestCase
     {
         // Arrange
         // バリデーションルールの取得
-        $allRules = (new StoreTagRequest())->rules();
+        $allRules = (new StoreTagRequest)->rules();
         $rules = ['name' => $allRules['name']]; // タグ名のバリデーションルールのみを使用
 
         // Arrange データセット(正常系 タグ名が適切に入力されている)
@@ -88,7 +88,7 @@ class TagValidationTest extends TestCase
         // Act バリデーションの実行
         $validator = \Validator::make($data, $rules);
 
-        /// Assert バリデーション通過を確認
+        // / Assert バリデーション通過を確認
         $this->assertFalse($validator->fails());
     }
 }

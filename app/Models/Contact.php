@@ -11,7 +11,7 @@ class Contact extends Model
 {
     use HasFactory;
 
-    //** 複数代入可能な属性
+    // ** 複数代入可能な属性
     protected $fillable = [
         'category_id',
         'first_name',
@@ -24,19 +24,19 @@ class Contact extends Model
         'detail',
     ];
 
-    //** このタスクが属するカテゴリーを取得
+    // ** このタスクが属するカテゴリーを取得
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
-    //** この問い合わせに紐づくタグを取得
+    // ** この問い合わせに紐づくタグを取得
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class)->withTimestamps();
     }
 
-    //** genderのラベルを取得
+    // ** genderのラベルを取得
     public function getGenderLabelAttribute(): string
     {
         return match ($this->gender) {

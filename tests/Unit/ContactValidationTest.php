@@ -2,20 +2,21 @@
 
 namespace Tests\Unit;
 
+use App\Http\Requests\ContactRequest;
+use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use App\Http\Requests\ContactRequest;
 
 class ContactValidationTest extends TestCase
 {
-
     use RefreshDatabase;
 
     /** @test */
     public function 不正な電話番号形式は拒否する(): void
     {
         // バリデーションルールの取得
-        $allRules = (new ContactRequest())->rules();
+        $allRules = (new ContactRequest)->rules();
         $rules = ['tel' => $allRules['tel']]; // 電話番号のバリデーションルールのみを使用
 
         // Arrange データセット(異常系 不正な電話番号形式)
@@ -34,7 +35,7 @@ class ContactValidationTest extends TestCase
     public function 必須項目に漏れがある(): void
     {
         // バリデーションルールの取得
-        $allRules = (new ContactRequest())->rules();
+        $allRules = (new ContactRequest)->rules();
         $rules = ['first_name' => $allRules['first_name']]; // 名前のバリデーションルールのみを使用
 
         // Arrange データセット(異常系 必須項目に漏れがある)
@@ -54,10 +55,10 @@ class ContactValidationTest extends TestCase
     {
         // Arrange
         // カテゴリを作成
-        \App\Models\Category::factory()->create(['id' => 1]);
+        Category::factory()->create(['id' => 1]);
 
         // バリデーションルールの取得
-        $rules = (new ContactRequest())->rules();
+        $rules = (new ContactRequest)->rules();
 
         // データセット(正常系 全ての必須項目が入力されている)
         $data = [
@@ -82,13 +83,13 @@ class ContactValidationTest extends TestCase
     {
         // Arrange
         // カテゴリとタグを準備作成
-        \App\Models\Category::factory()->create(['id' => 1]);
-        \App\Models\Tag::factory()->create(['id' => 1]);
-        \App\Models\Tag::factory()->create(['id' => 2]);
-        \App\Models\Tag::factory()->create(['id' => 3]);
+        Category::factory()->create(['id' => 1]);
+        Tag::factory()->create(['id' => 1]);
+        Tag::factory()->create(['id' => 2]);
+        Tag::factory()->create(['id' => 3]);
 
         // バリデーションルールの取得
-        $rules = (new ContactRequest())->rules();
+        $rules = (new ContactRequest)->rules();
 
         // データセット(正常系 タグ入力に入力がある)
         $data = [

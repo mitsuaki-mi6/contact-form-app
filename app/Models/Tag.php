@@ -10,12 +10,12 @@ class Tag extends Model
 {
     use HasFactory;
 
-    //** 複数代入可能な属性
+    // ** 複数代入可能な属性
     protected $fillable = [
         'name',
     ];
 
-    //** このタグが属する問い合わせを取得
+    // ** このタグが属する問い合わせを取得
     public function contacts(): BelongsToMany
     {
         return $this->belongsToMany(Contact::class)->withTimestamps();

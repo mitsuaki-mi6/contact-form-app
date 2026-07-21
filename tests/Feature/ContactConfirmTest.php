@@ -2,17 +2,13 @@
 
 namespace Tests\Feature;
 
-use App\Models\Contact;
 use App\Models\Category;
-use App\Models\Tag;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use Tests\TestCase;
 
 class ContactConfirmTest extends TestCase
 {
     use RefreshDatabase;
-
 
     /** @test */
     public function バリデーションエラー時はリダイレクトされエラーが返る(): void

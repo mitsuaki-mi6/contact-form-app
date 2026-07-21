@@ -1,10 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
-use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\TagController;
+use Illuminate\Support\Facades\Route;
 
 // ==========================================
 // 1. お問い合わせフォーム(公開ページ)
@@ -18,7 +17,7 @@ Route::post('/contacts/confirm', [ContactController::class, 'confirm'])->name('c
 // PG02	お問い合わせフォーム送信処理(テーブル更新)
 Route::post('/contacts', [ContactController::class, 'store'])->name('contact.store');
 
-//PG03	サンクスページ
+// PG03	サンクスページ
 Route::get('/thanks', [ContactController::class, 'thanks'])->name('contact.thanks');
 
 // ==========================================
