@@ -2,13 +2,11 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 use App\Models\Category;
-use App\Models\User;
 use App\Models\Contact;
-
+use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class AdminDetailTest extends TestCase
 {
@@ -30,7 +28,7 @@ class AdminDetailTest extends TestCase
         ]);
 
         // Act
-        $response = $this->actingAs($user)->get('admin/contacts/' . $contact->id);
+        $response = $this->actingAs($user)->get('admin/contacts/'.$contact->id);
 
         // Assert
         $response->assertStatus(200);

@@ -2,11 +2,10 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 use App\Models\Contact;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class AdminDeleteTest extends TestCase
 {
@@ -20,7 +19,7 @@ class AdminDeleteTest extends TestCase
         $contact = Contact::factory()->create();
 
         // Act
-        $response = $this->actingAs($user)->delete('admin/contacts/' . $contact->id);
+        $response = $this->actingAs($user)->delete('admin/contacts/'.$contact->id);
 
         // Assert
         $response->assertStatus(302);
@@ -35,7 +34,7 @@ class AdminDeleteTest extends TestCase
         $contact = Contact::factory()->create();
 
         // Act
-        $response = $this->actingAs($user)->delete('admin/contacts/' . $contact->id);
+        $response = $this->actingAs($user)->delete('admin/contacts/'.$contact->id);
 
         // Assert
         $response->assertRedirect('/admin');

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\IndexContactRequest;
-use App\Models\Contact;
 use App\Models\Category;
+use App\Models\Contact;
 use App\Models\Tag;
 
 class AdminController extends Controller
@@ -23,9 +23,9 @@ class AdminController extends Controller
         if ($request->filled('keyword')) {
             $keyword = $request->input('keyword');
             $query->where(function ($q) use ($keyword) {
-                $q->where('first_name', 'like', '%' . $keyword . '%')
-                    ->orWhere('last_name', 'like', '%' . $keyword . '%')
-                    ->orWhere('email', 'like', '%' . $keyword . '%');
+                $q->where('first_name', 'like', '%'.$keyword.'%')
+                    ->orWhere('last_name', 'like', '%'.$keyword.'%')
+                    ->orWhere('email', 'like', '%'.$keyword.'%');
             });
         }
 
@@ -64,6 +64,7 @@ class AdminController extends Controller
     public function show($id)
     {
         $contact = Contact::with(['category', 'tags'])->findOrFail($id);
+
         return view('admin.show', compact('contact'));
     }
 
@@ -72,6 +73,7 @@ class AdminController extends Controller
     {
         $contact = Contact::findOrFail($id);
         $contact->delete();
+
         return redirect()->route('admin.index')->with('success', 'お問い合わせを削除しました');
     }
 }

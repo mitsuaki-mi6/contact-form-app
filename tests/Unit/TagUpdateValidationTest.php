@@ -2,10 +2,11 @@
 
 namespace Tests\Unit;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
 use App\Http\Requests\UpdateTagRequest;
 use App\Models\Tag;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Routing\Route;
+use Tests\TestCase;
 
 class TagUpdateValidationTest extends TestCase
 {
@@ -19,7 +20,7 @@ class TagUpdateValidationTest extends TestCase
         $targetTag = Tag::factory()->create(['name' => '更新タグ']);   // 更新対象
 
         // バリデーションルールの取得
-        $allRules = (new UpdateTagRequest())->rules();
+        $allRules = (new UpdateTagRequest)->rules();
         $rules = ['name' => $allRules['name']]; // タグ名のバリデーションルールのみを使用
 
         // Arrange データセット(異常系 タグ名が重複している)
@@ -41,11 +42,11 @@ class TagUpdateValidationTest extends TestCase
         Tag::factory()->create(['name' => '重複タグ']);
         $targetTag = Tag::factory()->create(['name' => '更新タグ']);
 
-        $request = UpdateTagRequest::create('/admin/tags/' . $targetTag->id, 'PUT');
-        $route = new \Illuminate\Routing\Route('PUT', 'admin/tags/{id}', []);
+        $request = UpdateTagRequest::create('/admin/tags/'.$targetTag->id, 'PUT');
+        $route = new Route('PUT', 'admin/tags/{id}', []);
         $route->bind($request);
         $route->parameters(['id' => $targetTag->id]);
-        $request->setRouteResolver(fn() => $route);
+        $request->setRouteResolver(fn () => $route);
 
         // バリデーションルールの取得
         $rules = ['name' => $request->rules()['name']];
@@ -57,7 +58,7 @@ class TagUpdateValidationTest extends TestCase
         // Act バリデーションの実行
         $validator = \Validator::make($data, $rules);
 
-        /// Assert バリデーション通過を確認
+        // / Assert バリデーション通過を確認
         $this->assertFalse($validator->fails());
     }
 
@@ -69,7 +70,7 @@ class TagUpdateValidationTest extends TestCase
         $targetTag = Tag::factory()->create(['name' => '更新タグ']);   // 更新対象
 
         // バリデーションルールの取得
-        $allRules = (new UpdateTagRequest())->rules();
+        $allRules = (new UpdateTagRequest)->rules();
         $rules = ['name' => $allRules['name']]; // タグ名のバリデーションルールのみを使用
 
         // Arrange データセット(正常系 重複しない名前の変更)
@@ -79,7 +80,7 @@ class TagUpdateValidationTest extends TestCase
         // Act バリデーションの実行
         $validator = \Validator::make($data, $rules);
 
-        /// Assert バリデーション通過を確認
+        // / Assert バリデーション通過を確認
         $this->assertFalse($validator->fails());
     }
 }

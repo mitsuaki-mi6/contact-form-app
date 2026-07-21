@@ -41,7 +41,7 @@ class AdminSearchTest extends TestCase
 
         // Act
         // 検索条件でアクセス
-        $response = $this->actingAs($user)->get('/admin?keyword=山田&gender=1&category_id=' . $category1->id . '&date=2026-01-15');
+        $response = $this->actingAs($user)->get('/admin?keyword=山田&gender=1&category_id='.$category1->id.'&date=2026-01-15');
 
         // Assert
         // ヒットデータが表示され

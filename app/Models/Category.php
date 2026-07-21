@@ -10,12 +10,12 @@ class Category extends Model
 {
     use HasFactory;
 
-    //** 複数代入可能な属性
+    // ** 複数代入可能な属性
     protected $fillable = [
         'content',
     ];
 
-    //** このカテゴリーに属する問い合わせを取得
+    // ** このカテゴリーに属する問い合わせを取得
     public function contacts(): HasMany
     {
         return $this->hasMany(Contact::class);

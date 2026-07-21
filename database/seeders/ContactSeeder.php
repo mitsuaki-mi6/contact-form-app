@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-use App\Models\Contact;
 use App\Models\Category;
+use App\Models\Contact;
 use App\Models\Tag;
+use Illuminate\Database\Seeder;
 
 class ContactSeeder extends Seeder
 {
@@ -22,14 +21,14 @@ class ContactSeeder extends Seeder
             $contact = Contact::create([
                 // 既存のcategoriesからランダムに1つのIDを取得
                 'category_id' => Category::inRandomOrder()->first()->id,
-                'first_name'  => fake('ja_JP')->firstName,
-                'last_name'   => fake('ja_JP')->lastName,
-                'gender'      => fake()->randomElement([1, 2, 3]), // 1:男性, 2:女性, 3:その他
-                'email'       => fake()->safeEmail,
-                'tel'         => fake()->regexify('[0-9]{10,11}'), // 10〜11桁の数字（ハイフンなし）
-                'address'     => fake('ja_JP')->address,
-                'building'    => fake()->randomElement([fake('ja_JP')->secondaryAddress, null]), // 半分はNULLにする
-                'detail'      => fake('ja_JP')->realText(100), // 120文字以内のテキスト
+                'first_name' => fake('ja_JP')->firstName,
+                'last_name' => fake('ja_JP')->lastName,
+                'gender' => fake()->randomElement([1, 2, 3]), // 1:男性, 2:女性, 3:その他
+                'email' => fake()->safeEmail,
+                'tel' => fake()->regexify('[0-9]{10,11}'), // 10〜11桁の数字（ハイフンなし）
+                'address' => fake('ja_JP')->address,
+                'building' => fake()->randomElement([fake('ja_JP')->secondaryAddress, null]), // 半分はNULLにする
+                'detail' => fake('ja_JP')->realText(100), // 120文字以内のテキスト
             ]);
 
             // 既存のtagsからランダムに1〜3件を抽出して、中間テーブル（contact_tag）に紐付け

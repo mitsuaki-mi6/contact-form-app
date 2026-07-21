@@ -2,26 +2,23 @@
 
 namespace Tests\Unit;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
-
 use App\Models\Category;
 use App\Models\Contact;
-use App\Models\Tag;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class CategoryModelTest extends TestCase
 {
     use RefreshDatabase;
 
     /** @test */
-    public function カテゴリから紐づく複数のお問い合わせ（hasMany）が正しく取得できる(): void
+    public function カテゴリから紐づく複数のお問い合わせ（has_many）が正しく取得できる(): void
     {
         // Arrange
         // カテゴリを1つ作成し、それに紐づくお問い合わせを3つ作成する
         $category = Category::factory()->create();
         $contacts = Contact::factory()->count(3)->create([
-            'category_id' => $category->id
+            'category_id' => $category->id,
         ]);
 
         // Act
