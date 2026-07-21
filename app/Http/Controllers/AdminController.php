@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\IndexContactRequest;
 use App\Models\Contact;
 use App\Models\Category;
